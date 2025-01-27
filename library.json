@@ -1,0 +1,30 @@
+{
+    "name": "ebs-hal-uc-ch32v",
+    "version": "0.0.1",
+    "description": "EBS uC HAL implementation for WCH ch32v uCs",
+    "keywords": "ebs",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/ebs-universe/piolib-hal-uc-ch32v"
+    },
+    "authors": {
+        "name": "Chintalagiri Shashank",
+        "email": "shashank.chintalagiri@gmail.com",
+        "url": "https://github.com/chintal",
+        "maintainer": true
+    },
+    "license": "LGPL-3.0-or-later",
+    "homepage": "https://ebs-universe.github.io/piolib-hal-uc-ch32v",
+    "frameworks": "*",
+    "platforms": ["ch32v"],
+    "dependencies": [
+        { 
+            "owner": "chintal",
+            "name": "ebs-ds"        
+        },
+        { 
+            "owner": "chintal",
+            "name": "ebs-hal-uc" 
+        }
+    ]
+  }
