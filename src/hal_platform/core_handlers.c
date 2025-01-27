@@ -39,7 +39,7 @@ void SysTick_Handler(void) {
     //  done using the weak functions it provides.   
     //  
     // For now, keeping both running.  
-    SysTick->SR &= ~SYSTICK_SR_CNTIF;
+    SysTick->SR = 0;
     #if APP_USE_CORE_SYSTICK
         #ifdef uC_SYSTICK_TIMER_IRQH
             uC_SYSTICK_TIMER_IRQH();

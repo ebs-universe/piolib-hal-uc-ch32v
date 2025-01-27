@@ -23,7 +23,6 @@
 #define GPIO_IMPL_H
 
 #include <hal/uc/gpio.h>
-#include "ch32v003fun.h"
 #include "exti.h"
 #include "exti_handlers.h"
 

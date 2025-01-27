@@ -1,9 +1,9 @@
 /* 
    Copyright (c)
-     (c) 2024 Chintalagiri Shashank
+     (c) 2025 Chintalagiri Shashank
    
    This file is part of
-   Embedded bootstraps : Peripheral driver implementations : AVR
+   Embedded bootstraps : Peripheral driver implementations : CH32V
    
    This library is free software: you can redistribute it and/or modify
    it under the terms of the GNU Lesser General Public License as published
@@ -21,3 +21,33 @@
 
 
 #include "id_impl.h"
+#include <string.h>
+
+#if uC_ID_ENABLED 
+
+DeviceID_t device_id = {0};
+
+
+void id_init(void){
+    #if uC_ID_TRIMFUNC == 1
+        device_id.native[0] = *(uint32_t *)0x1FFFF7E8;
+	      device_id.native[1] = *(uint32_t *)0x1FFFF7EC;
+    #endif
+}
+
+uint8_t id_read(uint8_t len, void * buffer){
+    if (len == uC_ID_LENGTH) {
+        memcpy(buffer, (void *)0x1FFFF7E8, 8);
+        return 8;
+    } 
+    
+    if (len > uC_ID_MAXLEN) len = uC_ID_MAXLEN;
+    memcpy(buffer, (void *)0x1FFFF7E8, len);
+    return len; 
+}
+
+uint8_t id_write(uint8_t len, void * content){
+    return 0;
+}
+
+#endif

@@ -21,6 +21,7 @@
 #ifndef QDELAY_IMPL_H
 #define QDELAY_IMPL_H
 
+#include <iomap.h>
 #include <hal/uc/qdelay.h>
 
 #if uC_QDELAY_ENABLED

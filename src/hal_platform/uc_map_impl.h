@@ -39,6 +39,15 @@
 
 #define uC_CORE_ENABLED                1
 
+#if APP_ENABLE_ID
+    #define uC_ID_ENABLED               1
+    #ifdef APP_ID_TRIMFUNC
+        #define uC_ID_TRIMFUNC              APP_ID_TRIMFUNC
+    #else 
+        #define uC_ID_TRIMFUNC              1
+    #endif
+#endif
+
 #if APP_ENABLE_SYSTICK
     #define uC_SYSTICK_TIMER_ENABLED   1
     #define uC_SYSTICK_TIMER_IRQH      time_systick_handler

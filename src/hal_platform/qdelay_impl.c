@@ -20,7 +20,7 @@
 */
 
 
-#include "qdelay_impl.h"
+#include <hal/uc/qdelay.h>
 #include <string.h>
 
 #if uC_QDELAY_ENABLED 
@@ -33,7 +33,7 @@ qdelay_t _delay = {0};
 #elif uC_QDELAY_PROVIDER == QDELAY_PROVIDER_SYSTICK
  
     void qdelay_init(void) {
-        qdelay_spec.max = *(HAL_SFR_t *)(SysTick_BASE + OFS_SYSTICK_CMP);
+        qdelay_spec.max = SysTick->CMP;
         qdelay_spec.tick_freq = CLOCKTREE_SYSTICK_CLK / 1000000;
         volatile uint32_t max = qdelay_spec.max;
         volatile uint32_t freq = qdelay_spec.tick_freq;
@@ -43,7 +43,7 @@ qdelay_t _delay = {0};
     }
 
     void qdelay_start(qdelay_t * delay, uint16_t us) { 
-        delay->start = *(HAL_SFR_t *)(SysTick_BASE + OFS_SYSTICK_CNT);
+        delay->start = SysTick->CNT;
         HAL_BASE_t ticks = ((uint32_t)us * qdelay_spec.tick_freq);
         
         if (ticks > qdelay_spec.max) {
@@ -59,7 +59,7 @@ qdelay_t _delay = {0};
     }
 
     bool qdelay_check_done(qdelay_t * delay) {
-        uint32_t now = *(HAL_SFR_t *)(SysTick_BASE + OFS_SYSTICK_CNT);
+        uint32_t now = SysTick->CNT;
         bool result;
         if (delay->end > delay->start) {
             result = (now <= delay->end && now > delay->start);

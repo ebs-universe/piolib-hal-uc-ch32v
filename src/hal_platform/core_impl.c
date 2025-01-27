@@ -26,38 +26,21 @@
 #if uC_CORE_ENABLED
 
 
-/**
- * On this platform, most of the core initialization is left to 
- * ch32v003fun.h, and configured by funconfig.h. As a result, only
- * core_init() needs to be called, and this does what the power, 
- * clock and systick functions do other EBS HAL implementations. 
- * The other functions are noops.
- */
 void core_init(void) {
+    NVIC_PriorityGroupConfig(uC_NVIC_PRIORITY_CONF);
     SystemInit();
-    Delay_Ms(100);
-    RCC->APB1PCENR |= RCC_APB1Periph_PWR;
-    global_interrupt_enable();
+    SystemCoreClockUpdate();
+    // Delay_Init();
 }
 
-/**
-* See core_init()
-*/
 void power_set_full(void){
     ;
 }
-
-/**
-* See core_init()
-*/
 
 void clock_set_prescaler(uint16_t ps){
     ;    
 }
 
-/**
-* See core_init()
-*/
 __weak void clock_set_default(void){
     ;
 }
@@ -94,6 +77,13 @@ void watchdog_hold(void){
 #endif
 
 #if uC_SYSTICK_TIMER_ENABLED
+
+#define SYSTICK_SR_CNTIF    (1<<0)
+#define SYSTICK_CTLR_STE    (1<<0)
+#define SYSTICK_CTLR_STIE   (1<<1)
+#define SYSTICK_CTLR_STCLK  (1<<2)
+#define SYSTICK_CTLR_STRE   (1<<3)
+#define SYSTICK_CTLR_SWIE   (1<<31)
 
 void core_systick_start(void) {
     NVIC_SetPriority(SysTicK_IRQn, PRIO_SYSTICK);
