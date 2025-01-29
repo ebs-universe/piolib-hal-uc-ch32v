@@ -25,12 +25,10 @@
 
 #if uC_CORE_ENABLED
 
-
 void core_init(void) {
-    NVIC_PriorityGroupConfig(uC_NVIC_PRIORITY_CONF);
     SystemInit();
     SystemCoreClockUpdate();
-    // Delay_Init();
+    NVIC_PriorityGroupConfig(NVIC_PriorityGroup_0);
 }
 
 void power_set_full(void){

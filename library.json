@@ -1,6 +1,6 @@
 {
     "name": "ebs-hal-uc-ch32v",
-    "version": "0.1.0",
+    "version": "0.1.1",
     "description": "EBS uC HAL implementation for WCH ch32v uCs",
     "keywords": "ebs",
     "repository": {

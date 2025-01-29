@@ -47,6 +47,10 @@ static void enable_gpio_exti_irqs(void){
 void gpio_init(void){
     enable_gpio_clocks();
     enable_gpio_exti_irqs();
+    
+    GPIOA->CFGLR = 0x88888888;
+    GPIOC->CFGLR = 0x88888888;
+    GPIOD->CFGLR = 0x88888888;
 }
 
 void gpio_conf_output(PORTSELECTOR_t port, PINSELECTOR_t pin)
